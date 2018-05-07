@@ -1,0 +1,55 @@
+﻿<Window x:Class="КП1.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:КП1"
+        mc:Ignorable="d"
+        Title="Регистрация" Height="600" Width="750" Background="#C8C8C8">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="57"></RowDefinition>
+            <RowDefinition Height="57"></RowDefinition>
+            <RowDefinition Height="57"></RowDefinition>
+            <RowDefinition Height="57"></RowDefinition>
+            <RowDefinition Height="57"></RowDefinition>
+            <RowDefinition Height="57"></RowDefinition>
+            <RowDefinition Height="170"></RowDefinition>
+            <RowDefinition Height="57"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="170"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Height="50" Width="60" Margin="110, 15, 0, 0" FontSize="18">Имя:</Label>
+        <Label Grid.Row="1" Grid.Column="0" Height="50" Width="90" Margin="80, 15, 0, 0" FontSize="18">Фамилия:</Label>
+        <Label Grid.Row="2" Grid.Column="0" Height="50" Width="146" Margin="24, 15, 0, 0" FontSize="18">Почтовый ящик:</Label>
+        <Label Grid.Row="3" Grid.Column="0" Height="50" Width="65" Margin="105, 15, 0 ,0" FontSize="18">Логин:</Label>
+        <Label Grid.Row="4" Grid.Column="0" Height="50" Width="75" Margin="95, 15, 0 ,0" FontSize="18">Пароль:</Label>
+        <Label Grid.Row="5" Grid.Column="0" Height="50" Width="140" Margin="30, 15, 0, 0" FontSize="18">Дата рождения:</Label>
+        <Label Grid.Row="5" Grid.Column="1" Height="50" Width="50" Margin="0, 15, 175, 0" 
+               HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18">Пол:</Label>
+        <TextBox x:Name="regName" Grid.Row="0" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="White" FontSize="18">
+            <TextBox.ToolTip>
+                <ToolTip>Русскими буквами)</ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+        <TextBox x:Name="regLName" Grid.Row="1" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="#FFFDFEFF" FontSize="18"></TextBox>
+        <TextBox x:Name="regEmail" Grid.Row="2" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="White" FontSize="18"></TextBox>
+        <TextBox x:Name="regLogin" Grid.Row="3" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="White" FontSize="18"></TextBox>
+        <PasswordBox x:Name="regPassword" Grid.Row="4" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="White" FontSize="18"></PasswordBox>
+        <DatePicker x:Name="regDR" Grid.Row="5" Grid.Column="1" Height="30" Width="120" Margin="0, 10, 0, 0" HorizontalAlignment="Left" ></DatePicker>
+        <!--  <GroupBox Grid.Row="4" Grid.Column="1" Height ="30"> -->
+        <RadioButton x:Name="regM" Grid.Row="5" Grid.Column="1" Height ="30" Margin="0, 20, 100, 0" HorizontalAlignment="Right" VerticalAlignment="Center">Мужской</RadioButton>
+        <RadioButton x:Name="regZh" Grid.Row="5" Grid.Column="1" Height ="30" Margin="0, 20, 10, 0" HorizontalAlignment="Right" VerticalAlignment="Center">Женский</RadioButton>
+        <Canvas Grid.Row="6" Width="210" Height="210" Margin="5, 0" OpacityMask="#FFE80B0B" Background="#969696">
+            <Image x:Name="regPhoto" Grid.Row="6" Width="210" Height="210"  />
+        </Canvas>
+        <Button Background="#824141" Click="open_ButonClick" Grid.Row="7" Grid.Column="1" Height="40" Margin="60, 0, 0, 0"
+                Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16">Добавить фото</Button>
+        <Button Background="#824141" Click="Registr" x:Name="ButtonRegistration" Grid.Row="7" Grid.Column="1" Margin="0, 0, 10, 0"
+                Height="40" Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16">Регистрация</Button>
+        <Button Background="#824141" Click="Close" Grid.Row="7" Grid.Column="1" Height="40" Margin="0, 0, 150, 0"
+                Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16">Отмена</Button>
+    </Grid>
+</Window>

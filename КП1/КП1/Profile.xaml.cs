@@ -198,7 +198,7 @@ namespace КП1
                     NameDialog.SelectedItem = d;
                     Dialog dd = new Dialog();
                     dd = NameDialog.SelectedItem as Dialog;
-                    DB.Messages.Where(m => m.ID == dd.MessageId).Load();
+                    DB.Messages.Where(m => m.DialogID == dd.ID).Load();
                     _messagesList.ItemsSource = DB.Messages.Local;
                     NameDialog.SelectedItem = d;
                     //break;
@@ -222,7 +222,8 @@ namespace КП1
                     {
                         Sender_ID = (NameDialog.SelectedItem as Dialog).Sender_ID,
                         Receiver_ID = (NameDialog.SelectedItem as Dialog).Receiver_ID,
-                        Message = MyMessage.Text
+                        Message = MyMessage.Text,
+                        DialogID = (NameDialog.SelectedItem as Dialog).ID
                     };
 
                     DB.Messages.Add(M);
@@ -240,7 +241,7 @@ namespace КП1
             DB = new MyDatabase();
             Dialog dd = (NameDialog.SelectedItem as Dialog);
 
-            DB.Messages.Where(m => m.ID == dd.MessageId);
+            DB.Messages.Where(m => m.DialogID == dd.ID);
             //DB.Messages.Where(m => (m.ReceiverID == dd.Receiver_ID && m.SenderID == dd.Sender_ID) || (m.ReceiverID == dd.Sender_ID && m.SenderID == dd.Receiver_ID)).Load();
            // UnloadedEvent(dd);
             _messagesList.ItemsSource = DB.Messages.Local;

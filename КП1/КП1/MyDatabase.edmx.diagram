@@ -8,9 +8,9 @@
         <EntityTypeShape EntityType="MyDatabase1.Log_in" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MyDatabase1.User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="MyDatabase1.FK_ID" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MyDatabase1.Dialog" Width="1.5" PointX="3.375" PointY="4.25" />
-        <EntityTypeShape EntityType="MyDatabase1.Messages" Width="1.5" PointX="1.125" PointY="4.25" />
-        <AssociationConnector Association="MyDatabase1.FK__Dialog__MessageI__43D61337" />
+        <EntityTypeShape EntityType="MyDatabase1.Dialog" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="MyDatabase1.Messages" Width="1.5" PointX="3" PointY="4.25" />
+        <AssociationConnector Association="MyDatabase1.FK_MesDiaID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

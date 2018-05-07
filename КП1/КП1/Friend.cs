@@ -12,20 +12,16 @@ namespace КП1
     using System;
     using System.Collections.Generic;
     
-    public partial class Dialog
+    public partial class Friend
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Dialog()
-        {
-            this.Messages = new HashSet<Messages>();
-        }
+        public int Id { get; set; }
+        public int MyID { get; set; }
+        public int FriendID { get; set; }
+        public string Name { get; set; }
+        public string LName { get; set; }
+        public byte[] Photo { get; set; }
     
-        public int ID { get; set; }
-        public int Receiver_ID { get; set; }
-        public int Sender_ID { get; set; }
-        public string Receiver_Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Messages> Messages { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

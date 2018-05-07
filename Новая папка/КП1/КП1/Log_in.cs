@@ -12,20 +12,12 @@ namespace КП1
     using System;
     using System.Collections.Generic;
     
-    public partial class Dialog
+    public partial class Log_in
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Dialog()
-        {
-            this.Messages = new HashSet<Messages>();
-        }
-    
+        public string Login { get; set; }
+        public byte[] Password { get; set; }
         public int ID { get; set; }
-        public int Receiver_ID { get; set; }
-        public int Sender_ID { get; set; }
-        public string Receiver_Name { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Messages> Messages { get; set; }
+        public virtual User User { get; set; }
     }
 }

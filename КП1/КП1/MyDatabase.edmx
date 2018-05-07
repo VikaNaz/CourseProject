@@ -10,10 +10,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MessageId" Type="int" />
-          <Property Name="Sender_ID" Type="int" />
-          <Property Name="Receiver_ID" Type="int" />
-          <Property Name="Receiver_Name" Type="varchar" MaxLength="30" />
+          <Property Name="Receiver_ID" Type="int" Nullable="false" />
+          <Property Name="Sender_ID" Type="int" Nullable="false" />
+          <Property Name="Receiver_Name" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="Log_in">
           <Key>
@@ -30,8 +29,9 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Message" Type="varchar" MaxLength="500" />
-          <Property Name="Sender_ID" Type="int" />
-          <Property Name="Receiver_ID" Type="int" />
+          <Property Name="Receiver_ID" Type="int" Nullable="false" />
+          <Property Name="Sender_ID" Type="int" Nullable="false" />
+          <Property Name="DialogID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -45,18 +45,6 @@
           <Property Name="Gender" Type="bit" Nullable="false" />
           <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK__Dialog__MessageI__4F47C5E3">
-          <End Role="Messages" Type="Self.Messages" Multiplicity="0..1" />
-          <End Role="Dialog" Type="Self.Dialog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Messages">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Dialog">
-              <PropertyRef Name="MessageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ID">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Log_in" Type="Self.Log_in" Multiplicity="*" />
@@ -69,18 +57,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MesDiaID">
+          <End Role="Dialog" Type="Self.Dialog" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dialog">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="DialogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище MyDatabase1Container">
           <EntitySet Name="Dialog" EntityType="Self.Dialog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log_in" EntityType="Self.Log_in" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Dialog__MessageI__4F47C5E3" Association="Self.FK__Dialog__MessageI__4F47C5E3">
-            <End Role="Messages" EntitySet="Messages" />
-            <End Role="Dialog" EntitySet="Dialog" />
-          </AssociationSet>
           <AssociationSet Name="FK_ID" Association="Self.FK_ID">
             <End Role="User" EntitySet="User" />
             <End Role="Log_in" EntitySet="Log_in" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MesDiaID" Association="Self.FK_MesDiaID">
+            <End Role="Dialog" EntitySet="Dialog" />
+            <End Role="Messages" EntitySet="Messages" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -131,9 +131,9 @@
           </AssociationSet>
           <EntitySet Name="Dialog" EntityType="MyDatabase1.Dialog" />
           <EntitySet Name="Messages" EntityType="MyDatabase1.Messages" />
-          <AssociationSet Name="FK__Dialog__MessageI__43D61337" Association="MyDatabase1.FK__Dialog__MessageI__43D61337">
-            <End Role="Messages" EntitySet="Messages" />
+          <AssociationSet Name="FK_MesDiaID" Association="MyDatabase1.FK_MesDiaID">
             <End Role="Dialog" EntitySet="Dialog" />
+            <End Role="Messages" EntitySet="Messages" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Dialog">
@@ -141,11 +141,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MessageId" Type="Int32" />
-          <Property Name="Sender_ID" Type="Int32" />
-          <Property Name="Receiver_ID" Type="Int32" />
-          <NavigationProperty Name="Messages" Relationship="MyDatabase1.FK__Dialog__MessageI__43D61337" FromRole="Dialog" ToRole="Messages" />
-          <Property Name="Receiver_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Receiver_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sender_ID" Type="Int32" Nullable="false" />
+          <Property Name="Receiver_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Messages" Relationship="MyDatabase1.FK_MesDiaID" FromRole="Dialog" ToRole="Messages" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -153,19 +152,20 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Sender_ID" Type="Int32" />
-          <Property Name="Receiver_ID" Type="Int32" />
-          <NavigationProperty Name="Dialog" Relationship="MyDatabase1.FK__Dialog__MessageI__43D61337" FromRole="Messages" ToRole="Dialog" />
+          <Property Name="Receiver_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sender_ID" Type="Int32" Nullable="false" />
+          <Property Name="DialogID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dialog" Relationship="MyDatabase1.FK_MesDiaID" FromRole="Messages" ToRole="Dialog" />
         </EntityType>
-        <Association Name="FK__Dialog__MessageI__43D61337">
-          <End Type="MyDatabase1.Messages" Role="Messages" Multiplicity="0..1" />
-          <End Type="MyDatabase1.Dialog" Role="Dialog" Multiplicity="*" />
+        <Association Name="FK_MesDiaID">
+          <End Type="MyDatabase1.Dialog" Role="Dialog" Multiplicity="1" />
+          <End Type="MyDatabase1.Messages" Role="Messages" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Messages">
+            <Principal Role="Dialog">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Dialog">
-              <PropertyRef Name="MessageId" />
+            <Dependent Role="Messages">
+              <PropertyRef Name="DialogID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -202,9 +202,8 @@
             <EntityTypeMapping TypeName="MyDatabase1.Dialog">
               <MappingFragment StoreEntitySet="Dialog">
                 <ScalarProperty Name="Receiver_Name" ColumnName="Receiver_Name" />
-                <ScalarProperty Name="Receiver_ID" ColumnName="Receiver_ID" />
                 <ScalarProperty Name="Sender_ID" ColumnName="Sender_ID" />
-                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="Receiver_ID" ColumnName="Receiver_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -212,14 +211,15 @@
           <EntitySetMapping Name="Messages">
             <EntityTypeMapping TypeName="MyDatabase1.Messages">
               <MappingFragment StoreEntitySet="Messages">
-                <ScalarProperty Name="Receiver_ID" ColumnName="Receiver_ID" />
+                <ScalarProperty Name="DialogID" ColumnName="DialogID" />
                 <ScalarProperty Name="Sender_ID" ColumnName="Sender_ID" />
+                <ScalarProperty Name="Receiver_ID" ColumnName="Receiver_ID" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

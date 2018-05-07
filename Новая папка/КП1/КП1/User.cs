@@ -12,20 +12,29 @@ namespace КП1
     using System;
     using System.Collections.Generic;
     
-    public partial class Dialog
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Dialog()
+        public User()
         {
-            this.Messages = new HashSet<Messages>();
+            this.Friends = new HashSet<Friend>();
+            this.Friends1 = new HashSet<Friend>();
+            this.Log_in = new HashSet<Log_in>();
         }
     
         public int ID { get; set; }
-        public int Receiver_ID { get; set; }
-        public int Sender_ID { get; set; }
-        public string Receiver_Name { get; set; }
+        public string Name { get; set; }
+        public string LName { get; set; }
+        public string Email { get; set; }
+        public System.DateTime DR { get; set; }
+        public bool Gender { get; set; }
+        public byte[] Photo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Messages> Messages { get; set; }
+        public virtual ICollection<Friend> Friends { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Friend> Friends1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Log_in> Log_in { get; set; }
     }
 }

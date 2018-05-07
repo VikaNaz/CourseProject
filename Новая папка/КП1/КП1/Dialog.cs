@@ -17,15 +17,15 @@ namespace КП1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Dialog()
         {
-            this.Messages = new HashSet<Messages>();
+            this.Messages = new HashSet<Message>();
         }
     
-        public int ID { get; set; }
-        public int Receiver_ID { get; set; }
         public int Sender_ID { get; set; }
+        public int Receiver_ID { get; set; }
         public string Receiver_Name { get; set; }
+        public string Sender_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Messages> Messages { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }
