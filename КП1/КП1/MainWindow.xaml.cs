@@ -42,9 +42,9 @@ namespace КП1
             try
             {
                 bool Enter = false;
-                foreach (Log_in L in DB.Log_in.Where(l => l.Login == LoginEnter.Text && l.Password == PasswordEnter.Password))
+                foreach (Log_in l in DB.Log_in.Where(l => l.Login == LoginEnter.Text && l.Password == PasswordEnter.Password))
                 {
-                    foreach (User U in DB.User.Where(u => u.ID == L.ID))
+                    foreach (User U in DB.User.Where(u => u.ID == l.ID))
                     {
                         Enter = true;
                         Profile Profile = new Profile(U);

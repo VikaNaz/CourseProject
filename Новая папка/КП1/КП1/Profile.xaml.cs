@@ -39,8 +39,7 @@ namespace КП1
                 InitializeComponent();
 
 
-                if (DB.Messages.Where(m => m.SenderID == U.ID).Count() != 0)
-                    NameDialog.Loaded += NameDialog_Loaded;
+                    
 
                 Us = U;
                 xName.Content = U.Name + " " + U.LName;
@@ -61,8 +60,11 @@ namespace КП1
 
                 DB.Users.Where(u => u.ID != U.ID).Load();
                 qwe.ItemsSource = DB.Users.Local;
+                
 
-                NameDialog.SelectionChanged += NameDialog_SelectionChanged;
+                if (DB.Messages.Where(m => m.SenderID == U.ID || m.ReceiverID == U.ID).Count() != 0)
+                    NameDialog.SelectionChanged += NameDialog_SelectionChanged;
+                if (DB.Dialogs.Where(d => d.Sender_ID == U.ID || d.Receiver_ID == U.ID).Count() != 0) NameDialog.Loaded += NameDialog_Loaded;
                 Message.Loaded += Message_Loaded;
                 Prof.Loaded += Prof_Loaded;
 
@@ -135,7 +137,7 @@ namespace КП1
                     LoadMessageList();
                     System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
                     timer.Tick += Timer_Tick;
-                    timer.Interval = new TimeSpan(50000000);
+                    timer.Interval = new TimeSpan(3000000);
                     timer.Start();
                 }
             }
@@ -247,6 +249,7 @@ namespace КП1
                     {
                         NameDialog.SelectedItem = d;
                         Dialog dd = new Dialog();
+                        _messagesList.Items.Clear();
                         dd = NameDialog.SelectedItem as Dialog;
                         DB.Messages.Where(m => m.Dialog.Receiver_ID == dd.Receiver_ID && m.Dialog.Sender_ID == dd.Sender_ID && m.Dialog.Receiver_ID != dd.Sender_ID && m.Dialog.Sender_ID != dd.Receiver_ID).Load();
                         _messagesList.ItemsSource = DB.Messages.Local;
@@ -306,7 +309,7 @@ namespace КП1
                 {
                     Dialog dd = (NameDialog.SelectedItem as Dialog);
 
-                    DB.Messages.Where(m => (m.ReceiverID == dd.Receiver_ID || m.ReceiverID == dd.Sender_ID) && (m.SenderID == dd.Sender_ID || m.SenderID == dd.Receiver_ID)).OrderByDescending(o => o.ID).Load();
+                    DB.Messages.Where(m => (m.ReceiverID == dd.Receiver_ID && m.SenderID == dd.Sender_ID) || (m.SenderID == dd.Receiver_ID && m.ReceiverID == dd.Sender_ID)).Load();
 
 
                     _messagesList.ItemsSource = DB.Messages.Local;

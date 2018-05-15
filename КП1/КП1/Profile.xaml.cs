@@ -65,7 +65,8 @@ namespace КП1
             qwe.ItemsSource = DB.User.Local;
 
             NameDialog.SelectionChanged += NameDialog_SelectionChanged;
-            Message.Loaded += Message_Loaded;
+            Message
+                .Loaded += Message_Loaded;
             Prof.Loaded += Prof_Loaded;
 
 
