@@ -160,7 +160,7 @@
 
                                                     <Label  Grid.Column="0"  HorizontalAlignment="Left" VerticalContentAlignment="Center"  
                                                          HorizontalContentAlignment="Center" VerticalAlignment="Center" x:Name="LabelName" Content="{Binding Dialog.Sender_Name}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" ></Label>
-                                                    <TextBlock Grid.Column="1"  TextWrapping="WrapWithOverflow"  Width="370"  MinHeight="15" 
+                                                    <TextBlock Grid.Column="1"  TextWrapping="WrapWithOverflow"  VerticalAlignment="Center"  Width="370"  MinHeight="15" 
                                                            Background="{x:Null}"  x:Name="LabeMessage" Text="{Binding Message1}"  Foreground="#FF635D5D"></TextBlock>
                                                     <Label Grid.Column="2" Width="15" Height="15" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" MouseLeftButtonDown="DeleteMessage">
                                                         <Label.Background>

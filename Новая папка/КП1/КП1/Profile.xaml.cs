@@ -127,24 +127,14 @@ namespace КП1
 
         private void NameDialog_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
-            {
-                if (NameDialog.SelectedItem != null)
-                {
                     LoadMessageList();
                     System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
                     timer.Tick += Timer_Tick;
                     timer.Interval = new TimeSpan(50000000);
                     timer.Start();
-                }
-            }
-            catch ( Exception ex)
-            {
-                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
-            }
+                
         }
 
-        ////
         private void WriteMessage(object sender, MouseButtonEventArgs e)
         {
             try
@@ -156,7 +146,6 @@ namespace КП1
                 MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
         }
-        ////
 
         private void Dialog(User Receiver)
         {
@@ -182,6 +171,7 @@ namespace КП1
         {
             try
             {
+                NameDialog.SelectedItem = null;
                 DB.Dispose();
                 DB = new Database();
                 
@@ -192,7 +182,7 @@ namespace КП1
                 }
                 else
                 {
-                    int rec_ID = (qwe.SelectedItem as User).ID;
+                    int rec_ID = Receiver.ID;
                     if (DB.Dialogs.Where(d => d.Sender_ID == Us.ID && d.Receiver_ID == rec_ID).Count() == 0)
                     {
                         Dialog(Receiver);
@@ -201,15 +191,16 @@ namespace КП1
                     {
                         NameDialog.SelectedItem = null;
                         MainTb.SelectedItem = Message;
-                        List<Dialog> List = DB.Dialogs.Where(d => d.Receiver_ID == Us.ID && d.Sender_ID == Us.ID).ToList();
+                        List<Dialog> List = DB.Dialogs.Where(d => d.Receiver_ID == rec_ID && d.Sender_ID == Us.ID).ToList();
                         foreach (Dialog d in List)
                         {
                             NameDialog.SelectedItem = d;
                         }
                     }
                 }
-
                 qwe.SelectionChanged -= Qwe_SelectionChanged;
+                qwe.SelectedItem = null;
+
             }
             catch ( Exception ex)
             {
@@ -245,7 +236,6 @@ namespace КП1
                     {
                         NameDialog.SelectedItem = d;
                         Dialog dd = new Dialog();
-                        _messagesList.Items.Clear();
                         dd = NameDialog.SelectedItem as Dialog;
                         DB.Messages.Where(m => m.Dialog.Receiver_ID == dd.Receiver_ID && m.Dialog.Sender_ID == dd.Sender_ID && m.Dialog.Receiver_ID != dd.Sender_ID && m.Dialog.Sender_ID != dd.Receiver_ID).Load();
                         _messagesList.ItemsSource = DB.Messages.Local;
@@ -347,7 +337,7 @@ namespace КП1
             {
                 DB.Dispose();
                 DB = new Database();
-                DB.Users.Where(u => u.Name == TextBoxSearch.Text || u.LName == TextBoxSearch.Text || (u.Name + " " + u.LName) == TextBoxSearch.Text).Load();
+                DB.Users.Where(u => (u.Name.Contains(TextBoxSearch.Text) || u.LName.Contains(TextBoxSearch.Text) || (u.Name + " " + u.LName).Contains(TextBoxSearch.Text)) && (TextBoxSearch.Text != "" && u.Name != Us.Name)).Load();
                 SearchUsers.ItemsSource = DB.Users.Local;
             }
             catch ( Exception ex)
@@ -414,8 +404,9 @@ namespace КП1
                         MessageBox.Show("Этот пользователь уже есть у вас в друзьях.");
                     }
                 }
-
+                SearchUsers.SelectionChanged -= SearchUsers_SelectionChanged;
                 qwe.SelectionChanged -= Qwe_SelectionChanged1;
+                SearchUsers.SelectedItem = null;
             }
             catch ( Exception ex)
             {
@@ -456,8 +447,9 @@ namespace КП1
                         MessageBox.Show("Этот пользователь уже есть у вас в друзьях.");
                     }
                 }
-
                 qwe.SelectionChanged -= Qwe_SelectionChanged1;
+                SearchUsers.SelectionChanged -= Qwe_SelectionChanged1;
+                qwe.SelectedItem = null;
             }
             catch( Exception ex)
             {
@@ -481,6 +473,7 @@ namespace КП1
         {
             try
             {
+                NameDialog.SelectedItem = null;
                 DB.Dispose();
                 DB = new Database();
                 
@@ -508,8 +501,8 @@ namespace КП1
                         }
                     }
                 }
-
                 SearchUsers.SelectionChanged -= SearchUsers_SelectionChanged1;
+                SearchUsers.SelectedItem = null;
             }
             catch ( Exception ex)
             {
@@ -533,42 +526,27 @@ namespace КП1
         {
             try
             {
+                NameDialog.SelectedItem = null;
                 DB.Dispose();
                 DB = new Database();
-                
-                User Receiver = ListBoxFriend.SelectedItem as User;
+
+                User Receiver = DB.Users.Find((ListBoxFriend.SelectedItem as Friend).FriendID);
                 if (DB.Dialogs.Count() == 0)
                 {
-                    Dialog D1 = new Dialog { Receiver_ID = Receiver.ID, Sender_ID = Us.ID, Receiver_Name = Receiver.Name, Sender_Name = Us.Name };
-                    Dialog D2 = new Dialog { Sender_ID = Receiver.ID, Receiver_ID = Us.ID, Receiver_Name = Us.Name, Sender_Name = Receiver.Name };
-                    DB.Dialogs.Add(D1); DB.Dialogs.Add(D2);
-                    DB.SaveChanges();
-                    DB.Dispose();
-                    DB = new Database();
-                    DB.Dialogs.Where(d => d.Sender_ID == Us.ID && d.Receiver_ID != Us.ID).Load();
-                    NameDialog.ItemsSource = DB.Dialogs.Local;
-                    OpenMessages(Receiver.ID);
+                    Dialog(Receiver);
                 }
                 else
-                { 
-                    int rec_ID = (ListBoxFriend.SelectedItem as User).ID;
+                {
+                    int rec_ID = Receiver.ID;
                     if (DB.Dialogs.Where(d => d.Sender_ID == Us.ID && d.Receiver_ID == rec_ID).Count() == 0)
                     {
-                        Dialog D1 = new Dialog { Receiver_ID = Receiver.ID, Sender_ID = Us.ID, Receiver_Name = Receiver.Name, Sender_Name = Us.Name };
-                        Dialog D2 = new Dialog { Sender_ID = Receiver.ID, Receiver_ID = Us.ID, Receiver_Name = Us.Name, Sender_Name = Receiver.Name };
-                        DB.Dialogs.Add(D1); DB.Dialogs.Add(D2);
-                        DB.SaveChanges();
-                        DB.Dispose();
-                        DB = new Database();
-                        DB.Dialogs.Where(d => d.Sender_ID == Us.ID && d.Receiver_ID != Us.ID).Load();
-                        NameDialog.ItemsSource = DB.Dialogs.Local;
-                        OpenMessages(Receiver.ID);
+                        Dialog(Receiver);
                     }
                     else
                     {
                         NameDialog.SelectedItem = null;
                         MainTb.SelectedItem = Message;
-                        List<Dialog> List = DB.Dialogs.Where(d => d.Receiver_ID == Receiver.ID && d.Sender_ID == Us.ID).ToList();
+                        List<Dialog> List = DB.Dialogs.Where(d => d.Receiver_ID == rec_ID && d.Sender_ID == Us.ID).ToList();
                         foreach (Dialog d in List)
                         {
                             NameDialog.SelectedItem = d;
@@ -577,17 +555,70 @@ namespace КП1
                 }
 
                 ListBoxFriend.SelectionChanged -= ListBoxFriend_SelectionChanged;
+                ListBoxFriend.SelectedItem = null;
             }
-            catch ( Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
+            //try
+            //{
+            //    DB.Dispose();
+            //    DB = new Database();
+                
+            //    User Receiver = ListBoxFriend.SelectedItem as User;
+            //    if (DB.Dialogs.Count() == 0)
+            //    {
+            //        Dialog D1 = new Dialog { Receiver_ID = Receiver.ID, Sender_ID = Us.ID, Receiver_Name = Receiver.Name, Sender_Name = Us.Name };
+            //        Dialog D2 = new Dialog { Sender_ID = Receiver.ID, Receiver_ID = Us.ID, Receiver_Name = Us.Name, Sender_Name = Receiver.Name };
+            //        DB.Dialogs.Add(D1); DB.Dialogs.Add(D2);
+            //        DB.SaveChanges();
+            //        DB.Dispose();
+            //        DB = new Database();
+            //        DB.Dialogs.Where(d => d.Sender_ID == Us.ID && d.Receiver_ID != Us.ID).Load();
+            //        NameDialog.ItemsSource = DB.Dialogs.Local;
+            //        OpenMessages(Receiver.ID);
+            //    }
+            //    else
+            //    { 
+            //        int rec_ID = Receiver.ID;
+            //        if (DB.Dialogs.Where(d => d.Sender_ID == Us.ID && d.Receiver_ID == rec_ID).Count() == 0)
+            //        {
+            //            Dialog D1 = new Dialog { Receiver_ID = Receiver.ID, Sender_ID = Us.ID, Receiver_Name = Receiver.Name, Sender_Name = Us.Name };
+            //            Dialog D2 = new Dialog { Sender_ID = Receiver.ID, Receiver_ID = Us.ID, Receiver_Name = Us.Name, Sender_Name = Receiver.Name };
+            //            DB.Dialogs.Add(D1); DB.Dialogs.Add(D2);
+            //            DB.SaveChanges();
+            //            DB.Dispose();
+            //            DB = new Database();
+            //            DB.Dialogs.Where(d => d.Sender_ID == Us.ID && d.Receiver_ID != Us.ID).Load();
+            //            NameDialog.ItemsSource = DB.Dialogs.Local;
+            //            OpenMessages(Receiver.ID);
+            //        }
+            //        else
+            //        {
+            //            NameDialog.SelectedItem = null;
+            //            MainTb.SelectedItem = Message;
+            //            List<Dialog> List = DB.Dialogs.Where(d => d.Receiver_ID == Receiver.ID && d.Sender_ID == Us.ID).ToList();
+            //            foreach (Dialog d in List)
+            //            {
+            //                NameDialog.SelectedItem = d;
+            //            }
+            //        }
+            //    }
+
+            //    
+            //}
+            //catch ( Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
+            //}
         }
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
+                SearchUsers.SelectionChanged -= SearchUsers_SelectionChanged1;
                 DB.Dispose();
                 DB = new Database();
                 DB.Users.Where(u => (u.Name.Contains(TextBoxSearch.Text) || u.LName.Contains(TextBoxSearch.Text)  || (u.Name + " " + u.LName).Contains(TextBoxSearch.Text))&&(TextBoxSearch.Text != "" && u.Name != Us.Name)).Load();
