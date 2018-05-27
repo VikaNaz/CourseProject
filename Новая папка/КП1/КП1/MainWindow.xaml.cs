@@ -70,19 +70,28 @@ namespace КП1
                         }
                         break;
                     }
-                }
-                
+                }                
                 if (Enter == true)
                     Close();
                 else
                     MessageBox.Show("Неверный логин или пароль :(");                
-
             }
             catch (Exception)
             {
                 MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
             }
+        }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+               this.DragMove();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
 
         }
     }

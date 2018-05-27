@@ -4,52 +4,72 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:КП1"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            xmlns:donainl="clr-namespacec:MaterialDesignDemo.Domain"
+            xmlns:codeDisplayer="clr-namespace;CodeDisplayer; assembly=CodeDisplayer"
+        
         mc:Ignorable="d"
-        Title="Регистрация" Height="600" Width="750" Background="#C8C8C8">
-    <Grid>
+        Title="Регистрация" Height="530" Width="649.5" Background="#ffffff" Icon="User1.png" ResizeMode="NoResize">
+    <Grid Height="540" VerticalAlignment="Top">
         <Grid.RowDefinitions>
-            <RowDefinition Height="57"></RowDefinition>
-            <RowDefinition Height="57"></RowDefinition>
-            <RowDefinition Height="57"></RowDefinition>
-            <RowDefinition Height="57"></RowDefinition>
-            <RowDefinition Height="57"></RowDefinition>
-            <RowDefinition Height="57"></RowDefinition>
-            <RowDefinition Height="170"></RowDefinition>
-            <RowDefinition Height="57"></RowDefinition>
+            <RowDefinition Height="505"></RowDefinition>
+            <RowDefinition Height="64"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="599"></ColumnDefinition>
+            <ColumnDefinition Width="17"/>
+            <ColumnDefinition Width="126"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Height="50" Width="60" Margin="110, 15, 0, 0" FontSize="18">Имя:</Label>
-        <Label Grid.Row="1" Grid.Column="0" Height="50" Width="90" Margin="80, 15, 0, 0" FontSize="18">Фамилия:</Label>
-        <Label Grid.Row="2" Grid.Column="0" Height="50" Width="146" Margin="24, 15, 0, 0" FontSize="18">Почтовый ящик:</Label>
-        <Label Grid.Row="3" Grid.Column="0" Height="50" Width="65" Margin="105, 15, 0 ,0" FontSize="18">Логин:</Label>
-        <Label Grid.Row="4" Grid.Column="0" Height="50" Width="75" Margin="95, 15, 0 ,0" FontSize="18">Пароль:</Label>
-        <Label Grid.Row="5" Grid.Column="0" Height="50" Width="140" Margin="30, 15, 0, 0" FontSize="18">Дата рождения:</Label>
-        <Label Grid.Row="5" Grid.Column="1" Height="50" Width="50" Margin="0, 15, 175, 0" 
-               HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18">Пол:</Label>
-        <TextBox x:Name="regName" Grid.Row="0" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="White" FontSize="18">
+        <StackPanel Grid.ColumnSpan="3"></StackPanel>
+        <Label Margin="234,68,309,400" FontSize="18" Foreground="#0eba9b">Имя:</Label>
+        <Label Margin="233,108,267,358" FontSize="18" Foreground="#0eba9b">Фамилия:</Label>
+        <Label Margin="234,150,285,320" FontSize="18" Foreground="#0eba9b" Content="Email:"/>
+
+        <Label Margin="233,198,204,257" FontSize="18"  >Дата рождения:</Label>
+        <Label Height="50" Width="50" Margin="0,248,313,207" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" RenderTransformOrigin="9.82,-2.76" >Пол:</Label>
+        <Label Margin="196,303,199,140" FontSize="23" FontFamily="Segoe UI Historic" Foreground="#3ebd8f" Content="Параметры входа"/>
+        <TextBox x:Name="regName" Margin="322,60,15,413" FontFamily="Segoe UI Historic" BorderBrush="#FF171010" FontSize="18" Grid.ColumnSpan="2">
             <TextBox.ToolTip>
                 <ToolTip>Русскими буквами)</ToolTip>
             </TextBox.ToolTip>
         </TextBox>
-        <TextBox x:Name="regLName" Grid.Row="1" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="#FFFDFEFF" FontSize="18"></TextBox>
-        <TextBox x:Name="regEmail" Grid.Row="2" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="White" FontSize="18"></TextBox>
-        <TextBox x:Name="regLogin" Grid.Row="3" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="White" FontSize="18"></TextBox>
-        <PasswordBox x:Name="regPassword" Grid.Row="4" Grid.Column="1" Height="40" Margin="0, 10, 10, 0" BorderBrush="White" FontSize="18"></PasswordBox>
-        <DatePicker x:Name="regDR" Grid.Row="5" Grid.Column="1" Height="30" Width="120" Margin="0, 10, 0, 0" HorizontalAlignment="Left" ></DatePicker>
+
+        <TextBox x:Name="regLName" Margin="322,102,15,371" BorderBrush="Black" FontSize="18" Foreground="#FF060606" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="regEmail" Margin="322,140,15,330" BorderBrush="Black" FontSize="18" Grid.ColumnSpan="2"/>
+        <Image  Grid.Column="0" Source="Ресурс 1.png" Margin="10,-30,100,-202" Grid.RowSpan="2" Opacity="0.1" Grid.ColumnSpan="3"/>
+        <!-- <TextBox x:Name="regLogin" Margin="261,338,214,136" BorderBrush="Black" FontSize="18" Foreground="#FF8D5E5E" SelectionBrush="Black"/>
+       -->
+        <StackPanel Margin="60,357,259,110" Orientation="Horizontal">
+            <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070" />
+            <TextBox x:Name="regLogin" FontFamily="Segoe UI Historic"  materialDesign:HintAssist.Hint="Логин" Width="200" Margin="5" SelectionBrush="#FF0EBA9B" CaretBrush="#FF0EBA9B"/>
+            <!--<TextBox x:Name="LoginEnter" Margin="90,104,158,192" BorderBrush="{x:Null}" SelectionBrush="Black" Background="{x:Null}" Foreground="Black"/>-->
+        </StackPanel>
+        <StackPanel  Orientation="Horizontal" Margin="322,365,28,106">
+            <materialDesign:PackIcon Kind="Key" FontFamily="Segoe UI Historic" VerticalAlignment="Center" Foreground="#707070"/>
+            <PasswordBox x:Name="regPassword" FontFamily="Segoe UI Historic" materialDesign:HintAssist.Hint="Пароль" Width="213"  Margin="5,0,5,9" Foreground="Black" SelectionBrush="#FF0EBA9B" Background="{x:Null}" CaretBrush="#FF0EBA9B" RenderTransformOrigin="0.5,0.5" />
+            <!--<PasswordBox x:Name="PasswordEnter" Margin="110,176,138,121" BorderBrush="{x:Null}" SelectionBrush="{x:Null}"/>-->
+        </StackPanel>
+
+
+
+        <!-- <PasswordBox x:Name="regPassword" Margin="264,395,214,82" BorderBrush="#FF060606" FontSize="18"/>
+        -->
+        <DatePicker x:Name="regDR" Width="151" Margin="391,198,0,280" HorizontalAlignment="Left" />
         <!--  <GroupBox Grid.Row="4" Grid.Column="1" Height ="30"> -->
-        <RadioButton x:Name="regM" Grid.Row="5" Grid.Column="1" Height ="30" Margin="0, 20, 100, 0" HorizontalAlignment="Right" VerticalAlignment="Center">Мужской</RadioButton>
-        <RadioButton x:Name="regZh" Grid.Row="5" Grid.Column="1" Height ="30" Margin="0, 20, 10, 0" HorizontalAlignment="Right" VerticalAlignment="Center">Женский</RadioButton>
-        <Canvas Grid.Row="6" Width="210" Height="210" Margin="5, 0" OpacityMask="#FFE80B0B" Background="#969696">
-            <Image x:Name="regPhoto" Grid.Row="6" Width="210" Height="210"  />
+        <RadioButton  Background="#0eba9b" FontSize="14" FontFamily="Segoe UI Historic" x:Name="regM" Height ="30" Margin="0,255,151,220" HorizontalAlignment="Right" VerticalAlignment="Center" Width="84" >Мужской</RadioButton>
+        <RadioButton Background="#0eba9b" FontSize="14" FontFamily="Segoe UI Historic" x:Name="regZh" Height ="30" Margin="0,255,28,220" HorizontalAlignment="Right" VerticalAlignment="Center" Width="98" >Женский</RadioButton>
+        <Canvas Margin="40,57,385,286" OpacityMask="#FFE80B0B" Background="#33D3D3D3">
+            <Image x:Name="regPhoto"  Width="174" Height="162" Canvas.Top="0"  />
         </Canvas>
-        <Button Background="#824141" Click="open_ButonClick" Grid.Row="7" Grid.Column="1" Height="40" Margin="60, 0, 0, 0"
-                Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16">Добавить фото</Button>
-        <Button Background="#824141" Click="Registr" x:Name="ButtonRegistration" Grid.Row="7" Grid.Column="1" Margin="0, 0, 10, 0"
-                Height="40" Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16">Регистрация</Button>
-        <Button Background="#824141" Click="Close" Grid.Row="7" Grid.Column="1" Height="40" Margin="0, 0, 150, 0"
-                Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16">Отмена</Button>
+
+        <Button  Background="#0eba9b" Click="open_ButonClick" Height="40" Margin="46,232,0,233"
+                Width="161" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Segoe UI Historic" FontSize="16" BorderBrush="{x:Null}">Добавить фото</Button>
+        <Button Background="#0eba9b" Click="Registr" x:Name="ButtonRegistration" Margin="0,427,163,41"
+                Height="37" Width="134" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe UI Historic" RenderTransformOrigin="0.508,0.26" BorderBrush="{x:Null}">Регистрация</Button>
+        <Button  Click="Close" Height="36" Margin="0,426,10,43"
+                Width="140" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Background="White" Foreground="#0eba9b" BorderBrush="{x:Null}">Отмена</Button>
+        <Label Margin="177,7,166,454" FontSize="26"  FontFamily="Segoe UI Historic" Foreground="#3ebd8f" Content="Создание профиля"  />
+
+
     </Grid>
 </Window>

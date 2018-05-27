@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aa70149f25dc4d0787993352a783f825" Name="Diagram1">
-        <EntityTypeShape EntityType="DatabaseModel.Dialog" Width="1.5" PointX="5.75" PointY="0.875" />
-        <EntityTypeShape EntityType="DatabaseModel.Friend" Width="1.5" PointX="3" PointY="3.625" />
-        <EntityTypeShape EntityType="DatabaseModel.Log_in" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="DatabaseModel.Message" Width="1.5" PointX="8" PointY="0.875" />
-        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="0.75" PointY="2.125" />
+      <Diagram DiagramId="aa70149f25dc4d0787993352a783f825" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="DatabaseModel.Dialog" Width="1.5" PointX="5.5" PointY="1.125" />
+        <EntityTypeShape EntityType="DatabaseModel.Friend" Width="1.5" PointX="1.5" PointY="4.5" />
+        <EntityTypeShape EntityType="DatabaseModel.Log_in" Width="1.5" PointX="3.375" PointY="1.125" />
+        <EntityTypeShape EntityType="DatabaseModel.Message" Width="1.5" PointX="5.5" PointY="3.375" />
+        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="1.5" PointY="1.125" />
         <AssociationConnector Association="DatabaseModel.FK_ID_Messages" />
         <AssociationConnector Association="DatabaseModel.FK_FriendID" />
         <AssociationConnector Association="DatabaseModel.FK_MyID" />

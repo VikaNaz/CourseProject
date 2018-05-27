@@ -56,7 +56,7 @@ namespace КП1
                     Photo.Source = new BitmapImage(new Uri(path));
                 }
                 else
-                    Photo.Source = new BitmapImage(new Uri("улыбка.png"));
+                    Photo.Source = new BitmapImage(new Uri("Улыбка.png"));
 
                 DB.Users.Where(u => u.ID != U.ID).Load();
                 qwe.ItemsSource = DB.Users.Local;
@@ -65,17 +65,17 @@ namespace КП1
                 if (DB.Messages.Where(m => m.SenderID == U.ID || m.ReceiverID == U.ID).Count() != 0)
                     NameDialog.SelectionChanged += NameDialog_SelectionChanged;
                 if (DB.Dialogs.Where(d => d.Sender_ID == U.ID || d.Receiver_ID == U.ID).Count() != 0) NameDialog.Loaded += NameDialog_Loaded;
-                Message.Loaded += Message_Loaded;
-                Prof.Loaded += Prof_Loaded;
+                Message.Loaded += Prof_Loaded;
+                Message.Loaded += Prof_Loaded;
 
                 DB.Friends.Where(f => f.MyID == Us.ID).Load();
                 ListBoxFriend.ItemsSource = DB.Friends.Local;
 
                 
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Упс. Что-то пошло не так.");
+                MessageBox.Show(ex.Message + "Упс. Что-то пошло не так.");
             }
         }
 
@@ -85,16 +85,13 @@ namespace КП1
             {
                 NameDialog.SelectedItem = null;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
         }
 
-        private void Message_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+     
 
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -102,9 +99,9 @@ namespace КП1
             {
                 LoadMessageList();
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -121,9 +118,9 @@ namespace КП1
                     i++;
                 }
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
 
         }
@@ -137,13 +134,13 @@ namespace КП1
                     LoadMessageList();
                     System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
                     timer.Tick += Timer_Tick;
-                    timer.Interval = new TimeSpan(3000000);
+                    timer.Interval = new TimeSpan(50000000);
                     timer.Start();
                 }
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -154,9 +151,9 @@ namespace КП1
             {
                 qwe.SelectionChanged += Qwe_SelectionChanged;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
         }
         ////
@@ -175,9 +172,9 @@ namespace КП1
                 NameDialog.ItemsSource = DB.Dialogs.Local;
                 OpenMessages(Receiver.ID);
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -187,8 +184,7 @@ namespace КП1
             {
                 DB.Dispose();
                 DB = new Database();
-
-                User U = qwe.SelectedItem as User;
+                
                 User Receiver = qwe.SelectedItem as User;
                 if (DB.Dialogs.Count() == 0)
                 {
@@ -205,7 +201,7 @@ namespace КП1
                     {
                         NameDialog.SelectedItem = null;
                         MainTb.SelectedItem = Message;
-                        List<Dialog> List = DB.Dialogs.Where(d => d.Receiver_ID == U.ID && d.Sender_ID == Us.ID).ToList();
+                        List<Dialog> List = DB.Dialogs.Where(d => d.Receiver_ID == Us.ID && d.Sender_ID == Us.ID).ToList();
                         foreach (Dialog d in List)
                         {
                             NameDialog.SelectedItem = d;
@@ -215,9 +211,9 @@ namespace КП1
 
                 qwe.SelectionChanged -= Qwe_SelectionChanged;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -232,9 +228,9 @@ namespace КП1
                 DB.Friends.Where(f => f.MyID == Us.ID).Load();
                 ListBoxFriend.ItemsSource = DB.Friends.Local;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -257,9 +253,9 @@ namespace КП1
                     }
                 }
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -292,9 +288,9 @@ namespace КП1
                     }
                 }
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
 
         }
@@ -315,9 +311,9 @@ namespace КП1
                     _messagesList.ItemsSource = DB.Messages.Local;
                 }
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -337,9 +333,9 @@ namespace КП1
                     DB.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
 
             _messagesList.SelectionChanged -= _messagesList_SelectionChanged;
@@ -354,9 +350,9 @@ namespace КП1
                 DB.Users.Where(u => u.Name == TextBoxSearch.Text || u.LName == TextBoxSearch.Text || (u.Name + " " + u.LName) == TextBoxSearch.Text).Load();
                 SearchUsers.ItemsSource = DB.Users.Local;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -367,9 +363,9 @@ namespace КП1
                 qwe.SelectionChanged += Qwe_SelectionChanged1;
                 SearchUsers.SelectionChanged += Qwe_SelectionChanged1;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -379,9 +375,9 @@ namespace КП1
             {
                 SearchUsers.SelectionChanged += SearchUsers_SelectionChanged;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -421,9 +417,9 @@ namespace КП1
 
                 qwe.SelectionChanged -= Qwe_SelectionChanged1;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -463,9 +459,9 @@ namespace КП1
 
                 qwe.SelectionChanged -= Qwe_SelectionChanged1;
             }
-            catch(Exception)
+            catch( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message +"Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -475,9 +471,9 @@ namespace КП1
             {
                 SearchUsers.SelectionChanged += SearchUsers_SelectionChanged1;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -515,9 +511,9 @@ namespace КП1
 
                 SearchUsers.SelectionChanged -= SearchUsers_SelectionChanged1;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -527,9 +523,9 @@ namespace КП1
             {
                 ListBoxFriend.SelectionChanged += ListBoxFriend_SelectionChanged;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
 
@@ -539,8 +535,7 @@ namespace КП1
             {
                 DB.Dispose();
                 DB = new Database();
-
-                User U = ListBoxFriend.SelectedItem as User;
+                
                 User Receiver = ListBoxFriend.SelectedItem as User;
                 if (DB.Dialogs.Count() == 0)
                 {
@@ -573,7 +568,7 @@ namespace КП1
                     {
                         NameDialog.SelectedItem = null;
                         MainTb.SelectedItem = Message;
-                        List<Dialog> List = DB.Dialogs.Where(d => d.Receiver_ID == U.ID && d.Sender_ID == Us.ID).ToList();
+                        List<Dialog> List = DB.Dialogs.Where(d => d.Receiver_ID == Receiver.ID && d.Sender_ID == Us.ID).ToList();
                         foreach (Dialog d in List)
                         {
                             NameDialog.SelectedItem = d;
@@ -583,9 +578,24 @@ namespace КП1
 
                 ListBoxFriend.SelectionChanged -= ListBoxFriend_SelectionChanged;
             }
-            catch (Exception)
+            catch ( Exception ex)
             {
-                MessageBox.Show("Произошла ошибка.\nПовторите попытку.");
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
+            }
+        }
+
+        private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                DB.Dispose();
+                DB = new Database();
+                DB.Users.Where(u => (u.Name.Contains(TextBoxSearch.Text) || u.LName.Contains(TextBoxSearch.Text)  || (u.Name + " " + u.LName).Contains(TextBoxSearch.Text))&&(TextBoxSearch.Text != "" && u.Name != Us.Name)).Load();
+                SearchUsers.ItemsSource = DB.Users.Local;
+            }
+            catch ( Exception ex)
+            {
+                MessageBox.Show(ex.Message + "Произошла ошибка.\nПовторите попытку.");
             }
         }
     }

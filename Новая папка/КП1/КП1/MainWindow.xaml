@@ -4,32 +4,88 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:КП1"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            xmlns:donainl="clr-namespacec:MaterialDesignDemo.Domain"
+            xmlns:codeDisplayer="clr-namespace;CodeDisplayer; assembly=CodeDisplayer"
         mc:Ignorable="d"
-        Title="Вход" Height="370" Width="290" Background="#C8C8C8" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" Visibility="Visible" Icon="1.png" ResizeMode="NoResize" >
+        
+         Height="311.333" Width="543"  MouseLeftButtonDown="Window_MouseDown" Icon="1.png" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" AllowDrop="True" Focusable="False">
+
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="220"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+
+            <RowDefinition Height="309"></RowDefinition>
+            <RowDefinition Height="27"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70"></ColumnDefinition>
-            <ColumnDefinition Width="147*"></ColumnDefinition>
-            <ColumnDefinition Width="67*"/>
+            <ColumnDefinition Width="582"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Rectangle Width="543" Fill="White" Margin="0,0,39,20" Grid.RowSpan="2"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedButton}"  Click="Log_in" Height="Auto" Margin="74,207,412,63" IsDefault="True" Content="Войти" Background="#0eba9b" BorderBrush="{x:Null}" />
+        <Button Style="{DynamicResource MaterialDesignToolButton}" Click="Registr" Height="Auto" Margin="93,268,429,22" FontSize="9">Регистрация</Button>
+        <StackPanel Margin="16,14,264,10" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.243"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.662"/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
+            <Label  Content="Вход" FontSize="24" Margin="0,10" VerticalAlignment="top" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Segoe UI Historic"/>
+            <StackPanel Margin="0,15" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070" />
+                <TextBox x:Name="LoginEnter"   materialDesign:HintAssist.Hint="Логин" Width="200" Margin="5" SelectionBrush="#FF0EBA9B" CaretBrush="#FF0EBA9B"/>
+                <!--<TextBox x:Name="LoginEnter" Margin="90,104,158,192" BorderBrush="{x:Null}" SelectionBrush="Black" Background="{x:Null}" Foreground="Black"/>-->
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070"/>
+                <PasswordBox x:Name="PasswordEnter"   materialDesign:HintAssist.Hint="Пароль" Width="200"  Margin="5" Foreground="Black" SelectionBrush="#FF0EBA9B" Background="{x:Null}" CaretBrush="#FF0EBA9B" />
+                <!--<PasswordBox x:Name="PasswordEnter" Margin="110,176,138,121" BorderBrush="{x:Null}" SelectionBrush="{x:Null}"/>-->
+            </StackPanel>
 
-        <Image Grid.Column="0" Width="200" Source="1.png" Grid.ColumnSpan="3" Margin="42,0"></Image>
-        <Label Grid.Row="1" Grid.Column="0" Height="25" Width="46" Margin="4, 5, 0, 0">Логин:</Label>
-        <Label Grid.Row="2" Grid.Column="0" Height="25" Width="53" Margin="0,6,0,1">Пароль:</Label>
-        <TextBox x:Name="LoginEnter" Grid.Column="1" Grid.Row="1" Height="29" Margin="-10,1,5,2" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Grid.ColumnSpan="2"/>
-        <PasswordBox x:Name="PasswordEnter" Grid.Row="2" Grid.Column="1" Height="28" Margin="-10,2,5,1" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Grid.ColumnSpan="2"/>
-        <Button  Background="#824141" Click="Log_in" Grid.Row="3" Grid.Column="1" Height="30" Width="65" Margin="137,8,7,13" BorderBrush="#824141" Grid.ColumnSpan="2" IsDefault="True" >Войти</Button>
-        <Button Click="Registr" Grid.Row="3" Grid.Column="1" Height="20" Width="60" Margin="67,18,10,13" FontSize="9" Background="{x:Null}" BorderBrush="{x:Null}">Регистрация</Button>
+        </StackPanel>
+        <!--
+        <Button HorizontalAlignment="Center" FontFamily="Impact" Background="#FF3056AC" Click="Log_in" Width="44" Height="36" IsDefault="True" Margin="26,274,512,27" BorderBrush="{x:Null}">
+            <materialDesign:PackIcon Kind="Facebook" HorizontalAlignment="Center" FontSize="18"/>
+        </Button>
+        <Button HorizontalAlignment="Center" FontFamily="Impact" Background="Aqua" Click="Log_in"  IsDefault="True" Margin="104,274,432,27" BorderBrush="{x:Null}" Width="46" Height="Auto">
+            <materialDesign:PackIcon Kind="Twitter" HorizontalAlignment="Center" FontSize="18"/>
+        </Button>
+        <Button HorizontalAlignment="Center" FontFamily="Impact" Background="#FF3056AC" Click="Log_in" Height="Auto" IsDefault="True" Margin="185,274,351,27" BorderBrush="{x:Null}" Width="46" >
+            <materialDesign:PackIcon Kind="Vk" Width="20"   HorizontalAlignment="Center" FontSize="18" Height="15"/>
+        </Button>-->
+        <Image Source="chat.jpg" Margin="250,0,22,25" Grid.RowSpan="2" Stretch="Fill" />
+        <Rectangle Margin="249,-21,39,20" Grid.RowSpan="2" AllowDrop="True" >
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#CC09A27F" Offset="0.008"/>
+                    <GradientStop Color="#CC14868B" Offset="0.239"/>
+                    <GradientStop Color="#CC036074" Offset="0.563"/>
+                    <GradientStop Color="#CC0F2553" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <StackPanel Margin="267,57,43,21" Grid.RowSpan="2">
+            <TextBlock Text="Welcome" Foreground="White" HorizontalAlignment="Center" FontSize="48" Margin="23,0,28,0" FontWeight="Bold" Width="221" />
+            <TextBlock Text="to chat" Foreground="White" HorizontalAlignment="Center" FontSize="35" Margin="75,0,89,0" />
+        </StackPanel>
+
+        <Button Height="Auto" Margin="498,0,39,269" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+            <Image Source="clous.png" Width="14" RenderTransformOrigin="0.333,0.6" Height="12"></Image>
+        </Button>
     </Grid>
+
     <Window.Resources>
+
         <Style x:Key="MyStyle">
             <Setter Property="Control.Foreground" Value="White"></Setter>
+
         </Style>
+
     </Window.Resources>
+    <Window.Effect>
+        <DropShadowEffect/>
+    </Window.Effect>
 </Window>
